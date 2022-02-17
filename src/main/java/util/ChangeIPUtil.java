@@ -27,22 +27,19 @@ public class ChangeIPUtil{
             br = new BufferedReader(new FileReader(filename));
             // 循环读取文件的每一行, 对需要修改的行进行修改, 放入缓冲对象中
             while ((line = br.readLine()) != null) {
-                InfoEntity newinfo = new InfoEntity();
-                newinfo.setName(line.substring(0, line.indexOf("=")));
+                InfoEntity newinfo = new InfoEntity(line.substring(0, line.indexOf("=")));
                 if(line.substring(0, line.indexOf("=")).equals(resetname.toUpperCase())){
                     System.out.println("请输入改动后的值：");
-                    Scanner scvalue = new Scanner(System.in);
-                    String resetvalue = scvalue.next();
-                    newinfo.setValue(resetvalue);
+                    newinfo.setValue(new Scanner(System.in).next());
+//                    Runtime.getRuntime().exec("systemctl restart network");  //调用Linux的相关命令
                     caught = true;
-                    Runtime.getRuntime().exec("systemctl restart network");  //调用Linux的相关命令
                 }else{
                     newinfo.setValue(line.substring(line.indexOf("=")+1));
                 }
                 InfoList.add(newinfo);
             }
             if(!caught){
-                System.out.println("核对输入更改选项");
+                System.out.println("核对更改选项输入是否正确");
             }
             StringBuilder infoStringBuffer = new StringBuilder();
             for (InfoEntity Info : InfoList) {

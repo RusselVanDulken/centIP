@@ -10,7 +10,10 @@ public class InfoEntity {
     private String value;
     private String name;
 
-    public InfoEntity() { }
+    public InfoEntity() {}
+    public InfoEntity(String name) {
+        this.name = name;
+    }
     public InfoEntity(String value, String name) {
         this.value = value;
         this.name = name;
