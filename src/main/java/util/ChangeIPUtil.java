@@ -34,11 +34,18 @@ public class ChangeIPUtil{
                         newinfo.setValue(new Scanner(System.in).next());
                     }
                     if (line.substring(0, line.indexOf("=")).equals("NAME")) {
-                        filename = filename.substring(0, filename.lastIndexOf("/"));
-                        filename = filename + "/ifcfg-" + newinfo.getValue();
+                        filename = filename.substring(0, filename.lastIndexOf("/"))+ "/ifcfg-" + newinfo.getValue();//新文件名
                     }
                 }
                 InfoList.add(newinfo);
+            }
+            for(String check: resetname){
+                for(InfoEntity fail: InfoList){
+                    if (!fail.getValue().equals(check.toUpperCase())){
+                        System.out.println(check+"不存在,检查输入是否有误");
+                        break;
+                    }
+                }
             }
             StringBuilder infoStringBuffer = new StringBuilder();
             for (InfoEntity Info : InfoList) {

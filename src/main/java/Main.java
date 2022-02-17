@@ -1,11 +1,8 @@
-import model.InfoEntity;
-import util.ChangeIPUtil;
 
+import util.ChangeIPUtil;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -14,7 +11,6 @@ import java.util.Scanner;
  * @date 2022/2/16	当前系统日期
  * @time 8:47	当前系统时间
  */
-//src/main/resources/test/ifcfg-ens33
 public class Main {
     public static void main(String[] args) throws IOException {
         String windows = "windows";
@@ -35,16 +31,14 @@ public class Main {
                 System.out.println(Linename);
             }
             System.out.println("请输入需要更改的选项数：");
-            Scanner scval = new Scanner(System.in);
-            int val = scval.nextInt();
+            int val = new Scanner(System.in).nextInt();
             System.out.println("请输入需要更改的选项：");
-            Scanner scname = new Scanner(System.in);
             String[] name = new String[val];
             for (int i = 0; i < name.length ; i++) {
-                String b = scname.next();
+                String b = new Scanner(System.in).next();
                 name[i] = b;
             }
-//        String filename = "src/main/resources/ifcfg-ens33.txt";
+//        src/main/resources/ifcfg-ens33
             ChangeIPUtil.setIP(filename,name);
         }
     }
