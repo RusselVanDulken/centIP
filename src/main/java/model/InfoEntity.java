@@ -11,10 +11,8 @@ public class InfoEntity {
     private String name;
 
     public InfoEntity() {}
-    public InfoEntity(String name) {
-        this.name = name;
-    }
-    public InfoEntity(String value, String name) {
+
+    public InfoEntity(String name, String value) {
         this.value = value;
         this.name = name;
     }

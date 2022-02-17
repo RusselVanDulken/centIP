@@ -16,7 +16,7 @@ import java.util.Scanner;
  * @filename 绝对路径
  */
 public class ChangeIPUtil{
-    public static void setIP(String filename, String resetname) throws IOException {
+    public static void setIP(String filename, String[] resetname) throws IOException {
         //  操作系统 System.getProperties().getProperty("os.name");
         boolean caught = false;
         BufferedReader br = null;
@@ -27,19 +27,18 @@ public class ChangeIPUtil{
             br = new BufferedReader(new FileReader(filename));
             // 循环读取文件的每一行, 对需要修改的行进行修改, 放入缓冲对象中
             while ((line = br.readLine()) != null) {
-                InfoEntity newinfo = new InfoEntity(line.substring(0, line.indexOf("=")));
-                if(line.substring(0, line.indexOf("=")).equals(resetname.toUpperCase())){
-                    System.out.println("请输入改动后的值：");
-                    newinfo.setValue(new Scanner(System.in).next());
-//                    Runtime.getRuntime().exec("systemctl restart network");  //调用Linux的相关命令
-                    caught = true;
-                }else{
-                    newinfo.setValue(line.substring(line.indexOf("=")+1));
+                InfoEntity newinfo = new InfoEntity(line.substring(0, line.indexOf("=")),line.substring(line.indexOf("=") + 1));
+                for (String check:resetname) {
+                    if (line.substring(0, line.indexOf("=")).equals(check.toUpperCase())) {
+                        System.out.println("请输入" + check.toUpperCase() + "改动后的值：");
+                        newinfo.setValue(new Scanner(System.in).next());
+                    }
+                    if (line.substring(0, line.indexOf("=")).equals("NAME")) {
+                        filename = filename.substring(0, filename.lastIndexOf("/"));
+                        filename = filename + "/ifcfg-" + newinfo.getValue();
+                    }
                 }
                 InfoList.add(newinfo);
-            }
-            if(!caught){
-                System.out.println("核对更改选项输入是否正确");
             }
             StringBuilder infoStringBuffer = new StringBuilder();
             for (InfoEntity Info : InfoList) {
@@ -49,6 +48,7 @@ public class ChangeIPUtil{
             FileWriter fw=new FileWriter(filename);
             fw.write(infoStringBuffer.toString());
             fw.close();
+            // Runtime.getRuntime().exec("systemctl restart network");  //调用Linux的相关命令
         } catch (Exception e) {
             e.printStackTrace();
         }

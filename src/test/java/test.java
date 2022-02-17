@@ -15,7 +15,7 @@ public class test {
 
     public static void main(String[] args) throws IOException {
 
-        String filePath = "src/main/resources/test/ifcfg-ens33.txt";
+        String filePath = "src/main/resources/test/ifcfg-ens33";
         String line = null;
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         List<InfoEntity> InfoList = new ArrayList<>();
@@ -37,7 +37,7 @@ public class test {
         }
 //        System.out.println(infoStringBuffer.toString());
 
-        FileWriter fw=new FileWriter("src/main/resources/test/ifcfg-ens33.txt");
+        FileWriter fw=new FileWriter("src/main/resources/test/ifcfg-ens33");
         fw.write(infoStringBuffer.toString());
         fw.close();
     }
