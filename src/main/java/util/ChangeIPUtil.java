@@ -33,9 +33,9 @@ public class ChangeIPUtil{
                         System.out.println("请输入" + check.toUpperCase() + "改动后的值：");
                         newinfo.setValue(new Scanner(System.in).next());
                     }
-                    if (line.substring(0, line.indexOf("=")).equals("NAME")) {
-                        filename = filename.substring(0, filename.lastIndexOf("/"))+ "/ifcfg-" + newinfo.getValue();//新文件名
-                    }
+//                    if (line.substring(0, line.indexOf("=")).equals("NAME")) {
+//                        filename = filename.substring(0, filename.lastIndexOf("/"))+ "/ifcfg-" + newinfo.getValue();//新文件名
+//                    }
                 }
                 InfoList.add(newinfo);
             }
