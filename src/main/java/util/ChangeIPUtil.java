@@ -19,13 +19,11 @@ import java.util.Scanner;
 public class ChangeIPUtil{
     static String path = "src/main/resources/test/ifcfg-";
     public static void setProperty(String filename, String resetname,String resetvalue) {
-        BufferedReader br ;
         String line ;
         try {
-
             List<InfoEntity> InfoList = new ArrayList<>();
             // 根据文件路径创建缓冲输入流
-            br = new BufferedReader(new FileReader(path+filename));
+            BufferedReader br = new BufferedReader(new FileReader(path+filename));
             // 循环读取文件的每一行, 对需要修改的行进行修改, 放入缓冲对象中
             if(PreConUtil.getProperty(path+filename,resetname).equals("notexisted")){
                 while ((line = br.readLine()) != null) {

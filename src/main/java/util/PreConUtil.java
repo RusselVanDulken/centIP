@@ -2,10 +2,9 @@ package util;
 
 import model.InfoEntity;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 7w1st22
@@ -32,8 +31,29 @@ public class PreConUtil {
     }
 
     private static void Initialize(String file) throws IOException {
-        Runtime.getRuntime().exec("nmcli dev disconnect iface "+file);
+        BufferedReader br = new BufferedReader(new FileReader(path+file));
+        String line ;
+        List<InfoEntity> InfoList = new ArrayList<>();
+        while ((line = br.readLine()) != null) {
+            if(!line.substring(0, line.indexOf("=")).equals("IPADDR")){
+                if(!line.substring(0, line.indexOf("=")).equals("PREFIX")){
+                    if(!line.substring(0, line.indexOf("=")).equals("DNS1"))
+                        if(!line.substring(0, line.indexOf("=")).equals("GATEWAY")){
+                            InfoEntity newinfo = new InfoEntity(line.substring(0, line.indexOf("=")),line.substring(line.indexOf("=") + 1));
+                            InfoList.add(newinfo);
+                        }
+                }
+            }
+        }
+        StringBuilder infoStringBuffer = new StringBuilder();
+        for (InfoEntity Info : InfoList) {
+            infoStringBuffer.append(Info.getName()).append("=").append(Info.getValue()).append("\r\n");
+        }
+        FileWriter fw=new FileWriter(path+file);
+        fw.write(infoStringBuffer.toString());
+        fw.close();
     }
+
 
     public static String getProperty(String confpath,String property){
         BufferedReader br ;
