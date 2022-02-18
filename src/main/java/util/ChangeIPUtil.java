@@ -16,6 +16,7 @@ import java.util.Scanner;
  * @filename 绝对路径
  */
 public class ChangeIPUtil{
+
     public static void setIP(String filename, String[] resetname,String resetvalue) throws IOException {
         BufferedReader br = null;
         String line = null;
