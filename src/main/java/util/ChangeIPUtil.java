@@ -62,7 +62,7 @@ public class ChangeIPUtil{
             fw.close();
             PreConUtil.Prevention(filename);// Runtime.getRuntime().exec("systemctl restart network");
             String uuid = PreConUtil.getProperty(path+filename,"UUID");
-            Runtime.getRuntime().exec("nmcli con up "+uuid);
+//            Runtime.getRuntime().exec("nmcli con up "+uuid);
         } catch (Exception e) {
             e.printStackTrace();
         }

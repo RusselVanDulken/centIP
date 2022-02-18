@@ -22,7 +22,7 @@ public class PreConUtil {
         for(String checkfile:filename_all){
             if(!file.equals(checkfile)){
                 String pathip= getProperty(path+file,"IPADDR");
-                String otherip=getProperty(path+filename_all,"IPADDR");
+                String otherip=getProperty(path+checkfile,"IPADDR");
                 if(pathip.equals(otherip)){
                     Initialize(file);
                 }
@@ -33,6 +33,7 @@ public class PreConUtil {
     private static void Initialize(String file) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(path+file));
         String line ;
+        StringBuilder infoStringBuffer = new StringBuilder();
         List<InfoEntity> InfoList = new ArrayList<>();
         while ((line = br.readLine()) != null) {
             if(!line.substring(0, line.indexOf("=")).equals("IPADDR")){
@@ -45,7 +46,6 @@ public class PreConUtil {
                 }
             }
         }
-        StringBuilder infoStringBuffer = new StringBuilder();
         for (InfoEntity Info : InfoList) {
             infoStringBuffer.append(Info.getName()).append("=").append(Info.getValue()).append("\r\n");
         }
@@ -54,7 +54,15 @@ public class PreConUtil {
         fw.close();
     }
 
-
+    /**
+     * @author 7w1st22
+     * @package_name util    创建新文件的包的名称
+     * @date 2022/2/18	当前系统日期
+     * @time 13:48	当前系统时间
+     * @result 返回查询属性结果
+     * @param property  属性值
+     * @param confpath  绝对路径
+     */
     public static String getProperty(String confpath,String property){
         BufferedReader br ;
         property=property.toUpperCase();

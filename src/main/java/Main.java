@@ -39,7 +39,7 @@ public class Main {
                 resetname[i] = b;
             }
             for(String res:resetname){
-                ChangeIPUtil.setProperty(filename,res,"111");
+                ChangeIPUtil.setProperty(filename,res,"222");
             }
 
         }
