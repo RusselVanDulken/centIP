@@ -20,12 +20,12 @@ public class Main {
             System.out.println("当前为Windows系统");
 
         } else if (System.getProperties().getProperty("os.name").toLowerCase().contains(windows)){
-            System.out.println("请输入文件路径：(如：/etc/sysconfig/network-scripts/ifcfg-ens33)");
+            System.out.println("请输入修改网卡名：(如：ge1)");
             Scanner scfile = new Scanner(System.in);
             String filename = scfile.next();
             String Linename;
             String Line;
-            BufferedReader Br = new BufferedReader(new FileReader(filename));
+            BufferedReader Br = new BufferedReader(new FileReader("src/main/resources/test/ifcfg-"+filename));
             while ((Line = Br.readLine()) != null) {
                 Linename = Line.substring(0, Line.indexOf("="));
                 System.out.println(Linename);
@@ -33,13 +33,15 @@ public class Main {
             System.out.println("请输入需要更改的选项数：");
             int val = new Scanner(System.in).nextInt();
             System.out.println("请输入需要更改的选项：");
-            String[] name = new String[val];
-            for (int i = 0; i < name.length ; i++) {
+            String[] resetname = new String[val];
+            for (int i = 0; i < resetname.length ; i++) {
                 String b = new Scanner(System.in).next();
-                name[i] = b;
+                resetname[i] = b;
             }
-            String resetvalue = "test";
-            ChangeIPUtil.setIP(filename,name,resetvalue);
+            for(String res:resetname){
+                ChangeIPUtil.setProperty(filename,res,"111");
+            }
+
         }
     }
 }
