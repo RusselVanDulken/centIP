@@ -38,8 +38,8 @@ public class Main {
                 String b = new Scanner(System.in).next();
                 name[i] = b;
             }
-//        src/main/resources/ifcfg-ens33
-            ChangeIPUtil.setIP(filename,name);
+            String resetvalue = "test";
+            ChangeIPUtil.setIP(filename,name,resetvalue);
         }
     }
 }

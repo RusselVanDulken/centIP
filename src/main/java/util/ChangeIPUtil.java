@@ -16,9 +16,7 @@ import java.util.Scanner;
  * @filename 绝对路径
  */
 public class ChangeIPUtil{
-    public static void setIP(String filename, String[] resetname) throws IOException {
-        //  操作系统 System.getProperties().getProperty("os.name");
-        boolean caught = false;
+    public static void setIP(String filename, String[] resetname,String resetvalue) throws IOException {
         BufferedReader br = null;
         String line = null;
         try {
@@ -27,25 +25,27 @@ public class ChangeIPUtil{
             br = new BufferedReader(new FileReader(filename));
             // 循环读取文件的每一行, 对需要修改的行进行修改, 放入缓冲对象中
             while ((line = br.readLine()) != null) {
+
                 InfoEntity newinfo = new InfoEntity(line.substring(0, line.indexOf("=")),line.substring(line.indexOf("=") + 1));
                 for (String check:resetname) {
                     if (line.substring(0, line.indexOf("=")).equals(check.toUpperCase())) {
-                        System.out.println("请输入" + check.toUpperCase() + "改动后的值：");
-                        newinfo.setValue(new Scanner(System.in).next());
+//                        System.out.println("请输入" + check.toUpperCase() + "改动后的值：");
+//                        resetvalue = new Scanner(System.in).next();
+                        newinfo.setValue(resetvalue);
                     }
-//                    if (line.substring(0, line.indexOf("=")).equals("NAME")) {
-//                        filename = filename.substring(0, filename.lastIndexOf("/"))+ "/ifcfg-" + newinfo.getValue();//新文件名
-//                    }
                 }
                 InfoList.add(newinfo);
             }
             for(String check: resetname){
+                boolean caught = false;
                 for(InfoEntity fail: InfoList){
-                    if (!fail.getValue().equals(check.toUpperCase())){
-                        System.out.println(check+"不存在,检查输入是否有误");
+                    check = check.toUpperCase();
+                    if (fail.getName().equals(check)){
+                        caught = true;
                         break;
                     }
                 }
+                if(!caught)System.out.println(check+"不存在,检查输入是否有误");
             }
             StringBuilder infoStringBuffer = new StringBuilder();
             for (InfoEntity Info : InfoList) {
