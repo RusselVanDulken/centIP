@@ -25,6 +25,7 @@ public class PreConUtil {
                 String otherip=getProperty(path+checkfile,"IPADDR");
                 if(pathip.equals(otherip)){
                     Initialize(file);
+                    break;
                 }
             }
         }
@@ -36,14 +37,12 @@ public class PreConUtil {
         StringBuilder infoStringBuffer = new StringBuilder();
         List<InfoEntity> InfoList = new ArrayList<>();
         while ((line = br.readLine()) != null) {
-            if(!line.substring(0, line.indexOf("=")).equals("IPADDR")){
-                if(!line.substring(0, line.indexOf("=")).equals("PREFIX")){
-                    if(!line.substring(0, line.indexOf("=")).equals("DNS1"))
-                        if(!line.substring(0, line.indexOf("=")).equals("GATEWAY")){
-                            InfoEntity newinfo = new InfoEntity(line.substring(0, line.indexOf("=")),line.substring(line.indexOf("=") + 1));
-                            InfoList.add(newinfo);
-                        }
-                }
+            if(!line.substring(0, line.indexOf("=")).equals("IPADDR")) {
+                InfoEntity newinfo = new InfoEntity(line.substring(0, line.indexOf("=")), line.substring(line.indexOf("=") + 1));
+                InfoList.add(newinfo);
+            }else{
+                InfoEntity newinfo = new InfoEntity("IPADDR", "");
+                InfoList.add(newinfo);
             }
         }
         for (InfoEntity Info : InfoList) {
@@ -73,6 +72,7 @@ public class PreConUtil {
             while ((line = br.readLine()) != null) {
                 if(line.substring(0, line.indexOf("=")).equals(property)){
                     result=line.substring(line.indexOf("=") + 1);
+                    break;
                 }else{
                     result = "notexisted";
                 }

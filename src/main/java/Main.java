@@ -30,17 +30,10 @@ public class Main {
                 Linename = Line.substring(0, Line.indexOf("="));
                 System.out.println(Linename);
             }
-            System.out.println("请输入需要更改的选项数：");
-            int val = new Scanner(System.in).nextInt();
-            System.out.println("请输入需要更改的选项：");
-            String[] resetname = new String[val];
-            for (int i = 0; i < resetname.length ; i++) {
-                String b = new Scanner(System.in).next();
-                resetname[i] = b;
-            }
-            for(String res:resetname){
-                ChangeIPUtil.setProperty(filename,res,"222");
-            }
+            String res="DNS1";
+
+            ChangeIPUtil.setProperty(filename,res,"222");
+
 
         }
     }
