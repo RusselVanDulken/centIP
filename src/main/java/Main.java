@@ -30,10 +30,8 @@ public class Main {
                 Linename = Line.substring(0, Line.indexOf("="));
                 System.out.println(Linename);
             }
-            String res="DNS1";
-
-            ChangeIPUtil.setProperty(filename,res,"222");
-
+            String res="IPADDR";
+            ChangeIPUtil.setProperty(filename,res,"192.168.43.gfdgdf"+filename);
 
         }
     }

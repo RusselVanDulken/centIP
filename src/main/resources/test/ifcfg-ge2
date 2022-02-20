@@ -1,5 +1,4 @@
 PREFIX=test
 GATEWAY=192.168.103.1
 DNS1=222
-IPADDR=huihgiuhli
-
+IPADDR=
