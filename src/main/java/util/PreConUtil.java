@@ -14,8 +14,12 @@ import java.util.List;
  */
 public class PreConUtil {
 
-    public static String path = "src/main/resources/test/ifcfg-";
-
+    /**
+     * @param file 网卡名
+     * 检查与其他网卡是否ip相同冲突
+     */
+//    public static String path = "src/main/resources/test/ifcfg-";
+    public static String path = "/etc/sysconfig/network-scripts/ifcfg-";
     public static void Prevention(String file) throws IOException {
         String[] filename_all={"ge1","ge2","ge3"};
         //  path+file     src/main/resources/test/ifcfg-  ge1
@@ -31,6 +35,11 @@ public class PreConUtil {
         }
     }
 
+    /**
+     * 网卡名与其他冲突 置为空
+     * @param file 网卡名
+     * @throws IOException
+     */
     private static void Initialize(String file) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(path+file));
         String line ;
@@ -58,7 +67,7 @@ public class PreConUtil {
      * @package_name util    创建新文件的包的名称
      * @date 2022/2/18	当前系统日期
      * @time 13:48	当前系统时间
-     * @result 返回查询属性结果
+     * @result 返回查询属性结果 存在返回property的value 不存在则返回notexisted
      * @param property  属性值
      * @param confpath  绝对路径
      */
