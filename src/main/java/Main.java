@@ -1,7 +1,7 @@
 
 import util.ChangeIPUtil;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import util.SetProperty;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -16,23 +16,14 @@ public class Main {
         String windows = "windows";
         String linux = "linux";
         if (System.getProperties().getProperty("os.name").toLowerCase().contains(windows)) {
-
             System.out.println("当前为Windows系统");
-
         } else if (System.getProperties().getProperty("os.name").toLowerCase().contains(linux)){
-            System.out.println("请输入修改网卡名：(如：ge1)");
-            Scanner scfile = new Scanner(System.in);
-            String filename = scfile.next();
-            String Linename;
-            String Line;
-            BufferedReader Br = new BufferedReader(new FileReader("/etc/sysconfig/network-scripts/ifcfg-"+filename));
-            while ((Line = Br.readLine()) != null) {
-                Linename = Line.substring(0, Line.indexOf("="));
-                System.out.println(Linename);
-            }
-            String res="IPADDR";
-            ChangeIPUtil.setProperty(filename,res,"192.168.103.178");
-
+//            System.out.println("请输入修改网卡名：(如：ge1)");
+//            Scanner scfile = new Scanner(System.in);
+//            String filename = scfile.next();
+//            String res="IPADDR";
+//            ChangeIPUtil.setProperty(filename,res,"192.168.103.178");
+            SetProperty.setProperty("ge1","192.168.103.155","114.114.114.114","8.8.8.8","192.168.103.1","255.255.0.0");
         }
     }
 }
